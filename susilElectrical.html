@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Susil Electrical | Power & Lighting Solutions</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ============================================
+           CSS VARIABLES & RESET
+           ============================================ */
+        :root {
+            --navy: #0a1628;
+            --navy-light: #142238;
+            --gold: #f4c430;
+            --gold-dark: #d4a017;
+            --white: #ffffff;
+            --off-white: #f8f9fa;
+            --gray: #6c757d;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ============================================
+           UTILITY CLASSES
+           ============================================ */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+            box-shadow: 0 4px 15px rgba(244, 196, 48, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244, 196, 48, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .btn-large {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            padding: 1rem 0;
+        }
+
+        .navbar.scrolled {
+            padding: 0.75rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-size: 1.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-cta {
+            display: none;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        /* Decorative background elements */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(244, 196, 48, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(244, 196, 48, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--gold);
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-icon-circle {
+            width: 320px;
+            height: 320px;
+            border: 3px solid rgba(244, 196, 48, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: pulse 3s infinite;
+        }
+
+        .hero-icon-inner {
+            width: 240px;
+            height: 240px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--navy);
+            box-shadow: 0 20px 60px rgba(244, 196, 48, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        /* Floating elements */
+        .float-icon {
+            position: absolute;
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--navy);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .float-icon:nth-child(2) {
+            top: 10%;
+            right: 0;
+            animation-delay: 0s;
+        }
+
+        .float-icon:nth-child(3) {
+            bottom: 15%;
+            left: 0;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .float-icon i {
+            color: var(--gold);
+            font-size: 1.25rem;
+        }
+
+        /* ============================================
+           SERVICES SECTION
+           ============================================ */
+        .services {
+            background: var(--off-white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 span {
+            color: var(--gold-dark);
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(244, 196, 48, 0.15) 0%, rgba(244, 196, 48, 0.05) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--gold);
+            color: var(--navy);
+            transform: rotateY(360deg);
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--navy);
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        .about {
+            background: var(--white);
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image-main {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image-main i {
+            font-size: 8rem;
+            color: rgba(244, 196, 48, 0.2);
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--gold);
+            color: var(--navy);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(244, 196, 48, 0.3);
+        }
+
+        .about-badge .number {
+            font-size: 2rem;
+            display: block;
+            line-height: 1;
+        }
+
+        .about-badge .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-content h2 span {
+            color: var(--gold-dark);
+        }
+
+        .about-content p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .about-feature i {
+            color: var(--gold);
+            font-size: 1.25rem;
+        }
+
+        .about-feature span {
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        /* ============================================
+           CONTACT / CTA SECTION
+           ============================================ */
+        .contact {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(244, 196, 48, 0.1) 0%, transparent 70%);
+        }
+
+        .contact-container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .contact h2 span {
+            color: var(--gold);
+        }
+
+        .contact > .container > p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .contact-box {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-phone {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-phone i {
+            font-size: 2.5rem;
+            color: var(--gold);
+        }
+
+        .contact-phone .phone-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: 1px;
+        }
+
+        .contact-label {
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .contact-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gold);
+            color: var(--navy);
+            padding: 1.25rem 3rem;
+            border-radius: 50px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(244, 196, 48, 0.3);
+        }
+
+        .contact-cta:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(244, 196, 48, 0.4);
+        }
+
+        .contact-cta i {
+            font-size: 1.5rem;
+        }
+
+        .contact-hours {
+            margin-top: 2rem;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: #070f1a;
+            color: rgba(255,255,255,0.6);
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links ul li a {
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+           MOBILE NAVIGATION OVERLAY
+           ============================================ */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--navy);
+            z-index: 999;
+            padding: 6rem 2rem 2rem;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav a {
+            color: var(--white);
+            font-size: 1.25rem;
+            font-weight: 600;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--gold);
+            padding-left: 10px;
+        }
+
+        .mobile-nav .btn-primary {
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 992px) {
+            .hero-container,
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .hero-icon-circle {
+                width: 250px;
+                height: 250px;
+            }
+
+            .hero-icon-inner {
+                width: 180px;
+                height: 180px;
+                font-size: 3.5rem;
+            }
+
+            .float-icon {
+                display: none;
+            }
+
+            .about-image {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.25rem;
+            }
+
+            .section-header h2,
+            .about-content h2,
+            .contact h2 {
+                font-size: 2rem;
+            }
+
+            .contact-phone .phone-number {
+                font-size: 1.75rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .footer-brand p {
+                margin: 0 auto;
+            }
+
+            .section-padding {
+                padding: 3.5rem 0;
+            }
+
+            .contact-box {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.85rem;
+            }
+
+            .btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .contact-phone .phone-number {
+                font-size: 1.5rem;
+            }
+
+            .service-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* ============================================
+           SCROLL ANIMATIONS
+           ============================================ */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         NAVIGATION BAR
+         ============================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                Susil Electrical
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="tel:0777163330" class="btn btn-primary">
+                    <i class="fas fa-phone"></i> Call Now
+                </a></li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#home" class="mobile-link">Home</a>
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#about" class="mobile-link">About Us</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <a href="tel:0777163330" class="btn btn-primary">
+            <i class="fas fa-phone"></i> Call 0777163330
+        </a>
+    </div>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero" id="home">
+        <div class="container hero-container">
+            <div class="hero-content fade-in">
+                <h1>Powering Your World With <span>Brilliance</span></h1>
+                <p>From industrial generators to stunning event lighting, Susil Electrical delivers reliable power solutions and breathtaking illumination for every occasion. Trust us to light up your moments.</p>
+                <div class="hero-buttons">
+                    <a href="tel:0777163330" class="btn btn-primary btn-large">
+                        <i class="fas fa-phone"></i> Call Now: 0777163330
+                    </a>
+                    <a href="#services" class="btn btn-outline btn-large">
+                        Our Services
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-visual fade-in">
+                <div class="hero-icon-circle">
+                    <div class="hero-icon-inner">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                </div>
+                <div class="float-icon">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Trusted Experts</span>
+                </div>
+                <div class="float-icon">
+                    <i class="fas fa-clock"></i>
+                    <span>24/7 Available</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICES SECTION
+         ============================================ -->
+    <section class="services section-padding" id="services">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Our <span>Services</span></h2>
+                <p>Comprehensive electrical and lighting solutions tailored to your specific needs, delivered with professionalism and precision.</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-car-battery"></i>
+                    </div>
+                    <h3>Generator Supplying</h3>
+                    <p>High-quality generator sales and rentals for residential, commercial, and industrial needs. Reliable backup power solutions you can count on.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <h3>Electrical Decoration</h3>
+                    <p>Creative and safe electrical decor for homes, offices, and commercial spaces. Transform any environment with our expert wiring and design.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Event & Accent Lighting</h3>
+                    <p>Stunning lighting setups for weddings, parties, and corporate events. Create the perfect ambiance with our custom accent lighting designs.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <h3>Stadium & Large-Venue Lighting</h3>
+                    <p>Professional-grade lighting systems for stadiums, arenas, and large venues. High-power illumination that meets international standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ABOUT US SECTION
+         ============================================ -->
+    <section class="about section-padding" id="about">
+        <div class="container about-container">
+            <div class="about-image fade-in">
+                <div class="about-image-main">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="about-badge">
+                    <span class="number">10+</span>
+                    <span class="label">Years Experience</span>
+                </div>
+            </div>
+            
+            <div class="about-content fade-in">
+                <h2>Your Trusted Partner in <span>Power & Light</span></h2>
+                <p>At Susil Electrical, we believe that great lighting and reliable power are the foundations of every successful space and event. With over a decade of hands-on experience, we have built a reputation for excellence across Sri Lanka.</p>
+                <p>Whether you need a robust generator for your factory, elegant lighting for your dream wedding, or stadium-grade illumination for a major sporting event, our team brings technical expertise and creative vision to every project.</p>
+                
+                <div class="about-features">
+                    <div class="about-feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Safety First Always</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-award"></i>
+                        <span>Certified Experts</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-tools"></i>
+                        <span>Modern Equipment</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-headset"></i>
+                        <span>24/7 Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT / CTA SECTION
+         ============================================ -->
+    <section class="contact section-padding" id="contact">
+        <div class="container contact-container">
+            <h2 class="fade-in">Ready to Power Up? <span>Call Us Today</span></h2>
+            <p class="fade-in">Get in touch with Susil Electrical for a free consultation and quote. We're ready to bring light and power to your next project.</p>
+            
+            <div class="contact-box fade-in">
+                <div class="contact-phone">
+                    <i class="fas fa-phone-volume"></i>
+                    <span class="phone-number">0777163330</span>
+                </div>
+                <p class="contact-label">Developer & Business Contact Line</p>
+                <a href="tel:0777163330" class="contact-cta">
+                    <i class="fas fa-phone"></i> Call Now
+                </a>
+                <p class="contact-hours">
+                    <i class="far fa-clock"></i> Available 7 days a week &bull; Emergency call-outs accepted
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        Susil Electrical
+                    </a>
+                    <p>Providing premium electrical and lighting solutions across Sri Lanka. Your vision, our voltage.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Generator Supplying</a></li>
+                        <li><a href="#services">Electrical Decoration</a></li>
+                        <li><a href="#services">Event Lighting</a></li>
+                        <li><a href="#services">Stadium Lighting</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Susil Electrical. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--gold);"></i> for excellence.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        /* --------------------------------------------
+           MOBILE NAVIGATION TOGGLE
+           -------------------------------------------- */
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        const overlay = document.getElementById('overlay');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close mobile menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        /* --------------------------------------------
+           NAVBAR SCROLL EFFECT
+           -------------------------------------------- */
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        /* --------------------------------------------
+           ACTIVE NAV LINK HIGHLIGHTING ON SCROLL
+           -------------------------------------------- */
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        /* --------------------------------------------
+           SCROLL REVEAL ANIMATIONS
+           -------------------------------------------- */
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        fadeElements.forEach(el => fadeObserver.observe(el));
+
+        /* --------------------------------------------
+           SMOOTH SCROLL POLYFILL FOR SAFARI
+           (Modern browsers support CSS scroll-behavior,
+            but this ensures compatibility)
+           -------------------------------------------- */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
